@@ -24,6 +24,8 @@ import org.vaadin.lineawesome.LineAwesomeIconUrl;
 @Menu(order = 1, icon = LineAwesomeIconUrl.MAP_MARKER_SOLID)
 public class AddressFormView extends Composite<VerticalLayout> {
 
+    private static final String MIN_CONTENT = "min-content";
+
     public AddressFormView() {
         VerticalLayout layoutColumn2 = new VerticalLayout();
         H3 h3 = new H3();
@@ -31,8 +33,8 @@ public class AddressFormView extends Composite<VerticalLayout> {
         FormLayout formLayout2Col = new FormLayout();
         TextField textField2 = new TextField();
         TextField textField3 = new TextField();
-        Select select = new Select();
-        Select select2 = new Select();
+        Select<SampleItem> select = new Select<>();
+        Select<SampleItem> select2 = new Select<>();
         HorizontalLayout layoutRow = new HorizontalLayout();
         Button buttonPrimary = new Button();
         Button buttonSecondary = new Button();
@@ -44,32 +46,32 @@ public class AddressFormView extends Composite<VerticalLayout> {
         getContent().setFlexGrow(1.0, layoutColumn2);
         layoutColumn2.setWidth("100%");
         layoutColumn2.setMaxWidth("800px");
-        layoutColumn2.setHeight("min-content");
+        layoutColumn2.setHeight(MIN_CONTENT);
         h3.setText("Address");
-        h3.setWidth("min-content");
+        h3.setWidth(MIN_CONTENT);
         textField.setLabel("Street address");
         textField.setWidth("100%");
         formLayout2Col.setWidth("100%");
         textField2.setLabel("Postal code");
-        textField2.setWidth("min-content");
+        textField2.setWidth(MIN_CONTENT);
         textField3.setLabel("City");
-        textField3.setWidth("min-content");
+        textField3.setWidth(MIN_CONTENT);
         select.setLabel("State");
-        select.setWidth("min-content");
+        select.setWidth(MIN_CONTENT);
         setSelectSampleData(select);
         select2.setLabel("Country");
-        select2.setWidth("min-content");
+        select2.setWidth(MIN_CONTENT);
         setSelectSampleData(select2);
         layoutRow.setWidthFull();
         layoutColumn2.setFlexGrow(1.0, layoutRow);
         layoutRow.addClassName(Gap.MEDIUM);
         layoutRow.setWidth("100%");
-        layoutRow.setHeight("min-content");
+        layoutRow.setHeight(MIN_CONTENT);
         buttonPrimary.setText("Save");
-        buttonPrimary.setWidth("min-content");
+        buttonPrimary.setWidth(MIN_CONTENT);
         buttonPrimary.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonSecondary.setText("Cancel");
-        buttonSecondary.setWidth("min-content");
+        buttonSecondary.setWidth(MIN_CONTENT);
         getContent().add(layoutColumn2);
         layoutColumn2.add(h3);
         layoutColumn2.add(textField);
@@ -86,13 +88,13 @@ public class AddressFormView extends Composite<VerticalLayout> {
     record SampleItem(String value, String label, Boolean disabled) {
     }
 
-    private void setSelectSampleData(Select select) {
+    private void setSelectSampleData(Select<SampleItem> select) {
         List<SampleItem> sampleItems = new ArrayList<>();
         sampleItems.add(new SampleItem("state1", "State 1", null));
         sampleItems.add(new SampleItem("state2", "State 2", null));
         sampleItems.add(new SampleItem("state3", "State 3", null));
         select.setItems(sampleItems);
-        select.setItemLabelGenerator(item -> ((SampleItem) item).label());
-        select.setItemEnabledProvider(item -> !Boolean.TRUE.equals(((SampleItem) item).disabled()));
+        select.setItemLabelGenerator(item -> (item).label());
+        select.setItemEnabledProvider(item -> !Boolean.TRUE.equals((item).disabled()));
     }
 }
