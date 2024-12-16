@@ -1,6 +1,7 @@
 package com.example.chess.models.board;
 
 import com.example.chess.models.coordinate.Coordinate;
+import com.example.chess.models.pieces.IPiece;
 
 public interface IBoard {
     /**
@@ -14,7 +15,7 @@ public interface IBoard {
      * @param coordinate la coordenada de la posición (e.g., "a3").
      * @return la pieza en la posición especificada o null si no hay ninguna.
      */
-    Piece getPieceAt(Coordinate coordinate);
+    IPiece getPieceAt(Coordinate coordinate);
 
     /**
      * Saca una pieza de una posición específica del tablero.
@@ -22,7 +23,7 @@ public interface IBoard {
      * @param coordinate la coordenada de la posición (e.g., "a3").
      * @return la pieza que estaba en la posición, o null si no había ninguna.
      */
-    Piece removePieceAt(Coordinate coordinate);
+    IPiece removePieceAt(Coordinate coordinate);
 
     /**
      * Coloca una pieza en una posición específica del tablero.
@@ -30,7 +31,7 @@ public interface IBoard {
      * @param coordinate la coordenada de la posición (e.g., "a3").
      * @param piece la pieza a colocar, o null para dejar la posición vacía.
      */
-    void setPieceAt(Coordinate coordinate, Piece piece);
+    void setPieceAt(Coordinate coordinate, IPiece piece);
 
     /**
      * Verifica si una posición está dentro de los límites del tablero.

@@ -14,11 +14,19 @@ public abstract class AbstractPiece implements IPiece {
     }
 
     public EnumPieceNames getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(EnumPieceNames name) {
         this.name = name;
+    }
+
+    public EnumColorNames getColor() {
+        return this.color;
+    }
+
+    public void setColor(EnumColorNames color) {
+        this.color = color;
     }
 
     public Coordinate getCoordinate() {

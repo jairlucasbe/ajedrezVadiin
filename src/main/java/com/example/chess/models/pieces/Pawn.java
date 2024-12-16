@@ -5,44 +5,35 @@ import com.example.chess.models.coordinate.Coordinate;
 public class Pawn extends AbstractPiece {
 
     public Pawn(Coordinate coordinate) {
-        super(PieceNames.PAWN, coordinate);  // Llamada al constructor de la clase base (AbstractPiece)
+        super(EnumPieceNames.PAWN, coordinate); 
     }
 
     @Override
-    public boolean move(Coordinate endCoordinate) {
-        int rowDifference = Math.abs(this.getCoordinate().getRow() - endCoordinate.getRow());
-        int colDifference = Math.abs(this.getCoordinate().getColumn() - endCoordinate.getColumn());
-
-        if (rowDifference == 1 && colDifference == 0) {
+    public boolean move(Coordinate targetCoordinate) {
+        if (!targetCoordinate.isValid()) {
+            return false;
+        }
+        Coordinate currentCoordinate = this.getCoordinate();
+        int currentRow = currentCoordinate.getRow();
+        int currentColumnIndex = currentCoordinate.getColumnIndex();
+        int targetRow = targetCoordinate.getRow();
+        int targetColumnIndex = targetCoordinate.getColumnIndex();
+        int direction = this.getColor() == EnumColorNames.WHITE ? 1 : -1;
+        if (currentColumnIndex == targetColumnIndex && targetRow == currentRow + direction) {
+            this.setCoordinate(targetCoordinate);
             return true;
         }
-        
-        if (rowDifference == 2 && colDifference == 0 && this.getCoordinate().getRow() == 2) {
+        if (currentColumnIndex == targetColumnIndex &&
+            (currentRow == 2 || currentRow == 7) &&
+            targetRow == currentRow + 2 * direction) {
+            this.setCoordinate(targetCoordinate);
             return true;
         }
-
-        if (rowDifference == 1 && colDifference == 1) {
+        if (Math.abs(targetColumnIndex - currentColumnIndex) == 1 && targetRow == currentRow + direction) {
+            this.setCoordinate(targetCoordinate);
             return true;
         }
-
         return false;
     }
 
-    @Override
-    public EnumColorNames getColor() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getColor'");
-    }
-
-    @Override
-    public boolean canMove(Coordinate start, Coordinate end) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canMove'");
-    }
-
-    @Override
-    public void move(Coordinate start, Coordinate end) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
-    }
 }
